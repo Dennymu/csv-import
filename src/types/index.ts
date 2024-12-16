@@ -1,5 +1,6 @@
 import { Resource } from "i18next";
 import { HTMLAttributes } from "react";
+import { FileRow } from "../importer/features/main/types";
 
 type ModalParams = {
   isModal?: boolean;
@@ -20,4 +21,5 @@ export type CSVImporterProps = (HTMLAttributes<HTMLDialogElement> & HTMLAttribut
   skipHeaderRowSelection?: boolean;
   language?: string;
   customTranslations?: Resource;
+  passedData?: FileRow[];
 } & ModalParams;

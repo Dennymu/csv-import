@@ -38,6 +38,26 @@ const template = {
   ],
 };
 
+// const passedData = [
+//   { index: 0, values: ["first name", "last name"] },
+//   { index: 1, values: ["dennis", "murphy"] },
+//   { index: 2, values: ["nicole", "murphy"] },
+// ];
+const passedData = undefined;
+
+const customStyles = {
+  "color-primary": "#fdd800",
+  "color-primary-hover": "#bea200",
+  "color-background": "#ffffff",
+  "color-background-modal": "#ffffff",
+  "color-input-background": "#ffffff",
+  "color-background-menu-hover": "#ffffff",
+  "color-progress-bar": "#fdd800",
+  "color-text": "#212121",
+  "color-secondary": "#757575",
+  "color-secondary-hover": "#5d5d5d",
+};
+
 const Template: Story<typeof ImporterComponent> = (args: CSVImporterProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -62,7 +82,10 @@ export const Importer = Template.bind({});
 Importer.args = {
   language: "en",
   ...defaults,
+  darkMode: false,
   template: template,
+  passedData: passedData,
+  customStyles: customStyles,
   customTranslations: {
     jp: {
       Upload: "アップロード",

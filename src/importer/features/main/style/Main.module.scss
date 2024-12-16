@@ -42,4 +42,10 @@ $closeSide: calc(var(--m-xl) * 36 / 48);
   aspect-ratio: 1;
   font-size: var(--font-size-xl);
   padding: 0;
+  background-color: #757575;
+  color: #f8f8f8;
+}
+
+.close.close:hover {
+  background-color: #5d5d5d;
 }

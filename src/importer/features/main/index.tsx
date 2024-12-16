@@ -1,5 +1,6 @@
 import Papa from "papaparse";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import * as XLSX from "xlsx";
 import { IconButton } from "@chakra-ui/button";
 import Errors from "../../components/Errors";
@@ -18,7 +19,6 @@ import MapColumns from "../map-columns";
 import RowSelection from "../row-selection";
 import Uploader from "../uploader";
 import { PiX } from "react-icons/pi";
-import { useTranslation } from "react-i18next";
 
 export default function Main(props: CSVImporterProps) {
   const {
@@ -29,6 +29,7 @@ export default function Main(props: CSVImporterProps) {
     customStyles,
     showDownloadTemplateButton,
     skipHeaderRowSelection,
+    passedData,
   } = props;
   const skipHeader = skipHeaderRowSelection ?? false;
 
@@ -82,6 +83,18 @@ export default function Main(props: CSVImporterProps) {
       reload();
     }
   }, [data]);
+
+  useEffect(() => {
+    if (passedData && Array.isArray(passedData) && passedData.length > 0) {
+      setData({
+        fileName: "Import test",
+        rows: passedData,
+        sheetList: [],
+        errors: [],
+      });
+      goNext();
+    }
+  }, [passedData]);
 
   // Actions
   const reload = () => {
