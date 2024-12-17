@@ -5,7 +5,6 @@ export default function useCustomStyles(customStyles?: string) {
     if (customStyles) {
       const parsedStyles = JSON.parse(customStyles);
 
-      console.log("custom styles?", parsedStyles);
       if (parsedStyles) {
         Object.keys(parsedStyles).forEach((key) => {
           const root = document.documentElement;

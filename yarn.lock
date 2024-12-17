@@ -7720,9 +7720,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csv-import-react@workspace:.":
+"csv-import-react-dennis@workspace:.":
   version: 0.0.0-use.local
-  resolution: "csv-import-react@workspace:."
+  resolution: "csv-import-react-dennis@workspace:."
   dependencies:
     "@babel/preset-env": ^7.22.4
     "@babel/preset-react": ^7.22.3

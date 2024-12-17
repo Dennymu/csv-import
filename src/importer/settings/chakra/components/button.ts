@@ -31,6 +31,7 @@ const Button = defineStyleConfig({
         return {
           _hover: {
             backgroundColor: "var(--external-colors-secondary-300)",
+            borderColor: "#757575",
           },
 
           color: "var(--color-text-on-secondary)",
