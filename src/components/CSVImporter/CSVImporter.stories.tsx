@@ -24,7 +24,7 @@ const template = {
       key: "first_name",
       required: true,
       description: "The first name of the user",
-      suggested_mappings: ["first", "mame"],
+      suggested_mappings: ["first", "name"],
     },
     {
       name: "Last Name",
@@ -86,6 +86,7 @@ Importer.args = {
   template: template,
   passedData: passedData,
   customStyles: customStyles,
+  allowCustom: true,
   customTranslations: {
     jp: {
       Upload: "アップロード",

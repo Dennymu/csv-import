@@ -17,6 +17,7 @@ export declare function createCSVImporter(props: CreateImporterProps): {
         language?: string | undefined;
         customTranslations?: import("i18next").Resource | undefined;
         passedData?: import("./importer/features/main/types").FileRow[] | undefined;
+        allowCustom?: boolean | undefined;
     } & {
         isModal?: boolean | undefined;
         modalIsOpen?: boolean | undefined;

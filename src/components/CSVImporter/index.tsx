@@ -26,6 +26,7 @@ const CSVImporter = forwardRef((importerProps: CSVImporterProps, forwardRef?: an
     language,
     customTranslations,
     passedData,
+    allowCustom,
     ...props
   } = importerProps;
   const ref = forwardRef ?? useRef(null);

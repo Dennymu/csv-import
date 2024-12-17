@@ -30,6 +30,7 @@ export default function Main(props: CSVImporterProps) {
     showDownloadTemplateButton,
     skipHeaderRowSelection,
     passedData,
+    allowCustom,
   } = props;
   const skipHeader = skipHeaderRowSelection ?? false;
 
@@ -68,7 +69,7 @@ export default function Main(props: CSVImporterProps) {
   });
 
   useEffect(() => {
-    const [parsedTemplate, parsedTemplateError] = convertRawTemplate(template);
+    const [parsedTemplate, parsedTemplateError] = convertRawTemplate(template, allowCustom || false);
     if (parsedTemplateError) {
       setInitializationError(parsedTemplateError);
     } else if (parsedTemplate) {
@@ -219,17 +220,25 @@ export default function Main(props: CSVImporterProps) {
                 values: Record<string, number | string>;
               };
               const startIndex = (selectedHeaderRow || 0) + 1;
-
+              const mappedHeaderRow = data.rows[selectedHeaderRow || 0];
+              const headerRow = mappedHeaderRow.values;
               const mappedRows: MappedRow[] = [];
               data.rows.slice(startIndex).forEach((row: FileRow) => {
                 const resultingRow: MappedRow = {
                   index: row.index - startIndex,
                   values: {},
                 };
+                let customCount = 1;
                 row.values.forEach((value: string, valueIndex: number) => {
                   const mapping = columnMapping[valueIndex];
                   if (mapping && mapping.include) {
-                    resultingRow.values[mapping.key] = value;
+                    if (mapping.key === "custom") {
+                      resultingRow.values["custom_header" + customCount] = headerRow[valueIndex] || "";
+                      resultingRow.values[mapping.key + "_field" + customCount] = value;
+                      customCount++;
+                    } else {
+                      resultingRow.values[mapping.key] = value;
+                    }
                   }
                 });
                 mappedRows.push(resultingRow);

@@ -79,6 +79,7 @@ export default function useMapColumnsTable(
       const templatesFields = { ...prev, [uploadColumnIndex]: { ...prev[uploadColumnIndex], key: key, include: !!key, selected: !!key } };
       const templateFieldsObj = Object.values(templatesFields).map(({ key, selected }) => ({ key, selected }));
       setSelectedValues(templateFieldsObj);
+      console.log("Template fields:", templateFields, "template fields object:", templateFieldsObj);
       return templatesFields;
     });
   };

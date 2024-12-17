@@ -20,5 +20,6 @@ export type CSVImporterProps = (HTMLAttributes<HTMLDialogElement> & HTMLAttribut
     language?: string;
     customTranslations?: Resource;
     passedData?: FileRow[];
+    allowCustom?: boolean;
 } & ModalParams;
 export {};

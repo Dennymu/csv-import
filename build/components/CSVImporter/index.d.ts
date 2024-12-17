@@ -14,7 +14,8 @@ declare const CSVImporter: React.ForwardRefExoticComponent<React.HTMLAttributes<
     skipHeaderRowSelection?: boolean | undefined;
     language?: string | undefined;
     customTranslations?: import("i18next").Resource | undefined;
-    passedData?: [] | undefined;
+    passedData?: import("../../importer/features/main/types").FileRow[] | undefined;
+    allowCustom?: boolean | undefined;
 } & {
     isModal?: boolean | undefined;
     modalIsOpen?: boolean | undefined;
