@@ -8,7 +8,6 @@ import { UploaderProps } from "./types";
 import style from "./style/Uploader.module.scss";
 import { PiDownloadSimple } from "react-icons/pi";
 
-
 export default function Uploader({ template, skipHeaderRowSelection, onSuccess, showDownloadTemplateButton, setDataError }: UploaderProps) {
   const fields = useTemplateTable(template.columns);
   const theme = useThemeStore((state) => state.theme);
@@ -36,8 +35,9 @@ export default function Uploader({ template, skipHeaderRowSelection, onSuccess, 
       _hover={
         theme === "light"
           ? {
-              background: "var(--color-border)",
+              background: "var(--color-primary)",
               color: "var(--color-text)",
+              borderColor: "#757575",
             }
           : undefined
       }>

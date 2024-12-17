@@ -66,8 +66,9 @@ export default function UploaderWrapper({ onSuccess, setDataError, ...props }: U
               _hover={
                 theme === "light"
                   ? {
-                      background: "var(--color-border)",
+                      background: "var(--color-primary)",
                       color: "var(--color-text)",
+                      borderColor: "#757575",
                     }
                   : undefined
               }>

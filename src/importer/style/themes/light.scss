@@ -1,11 +1,11 @@
-:root {
+.CSVImporter-light {
   color-scheme: light;
 
   // BACKGROUND
 
-  --color-background: #{$gray-100};
+  // --color-background: #{$gray-100};
   --color-background-main: #{$base-white};
-  --color-background-modal: #{$base-white};
+  // --color-background-modal: #{$base-white};
   --color-background-modal-hover: #{$base-white};
   --color-background-modal-veil: #0e1116;
   --color-background-modal-shadow: transparent;
@@ -17,12 +17,12 @@
   --color-tertiary-disabled: #{$gray-200};
 
   --color-background-menu: #{$base-white};
-  --color-background-menu-hover: #{$gray-100};
+  // --color-background-menu-hover: #{$gray-100};
 
   // TEXT
 
   --color-text-strong: #{$gray-900};
-  --color-text: #{$gray-800};
+  // --color-text: #{$gray-800};
   --color-text-soft: #{$gray-500};
 
   --color-text-on-tertiary: #{$gray-700};
@@ -36,7 +36,7 @@
 
   // INPUT
 
-  --color-input-background: #{$base-white};
+  // --color-input-background: #{$base-white};
   --color-input-background-soft: #{$gray-300};
   --color-input-border: #{$gray-700};
   --color-input-placeholder: #{$gray-700};

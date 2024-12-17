@@ -1,11 +1,11 @@
-:root {
+.CSVImporter-dark {
   color-scheme: dark;
 
   // BACKGROUND
 
-  --color-background: #0e1116;
+  // --color-background: #0e1116;
   --color-background-main: var(--color-background);
-  --color-background-modal: #171a20;
+  // --color-background-modal: #171a20;
   --color-background-modal-hover: #2e323c;
   --color-background-modal-veil: #0e1116;
   --color-background-modal-shadow: #0e1116;
@@ -17,12 +17,12 @@
   --color-tertiary-disabled: #{$gray-200};
 
   --color-background-menu: #{$gray-900};
-  --color-background-menu-hover: #{$gray-800};
+  // --color-background-menu-hover: #{$gray-800};
 
   // TEXT
 
   --color-text-strong: #{$gray-100};
-  --color-text: #{$gray-300};
+  // --color-text: #{$gray-300};
   --color-text-soft: #{$gray-500};
 
   --color-text-on-tertiary: #{$base-white};
@@ -36,7 +36,7 @@
 
   // INPUT
 
-  --color-input-background: #{$gray-900};
+  // --color-input-background: #{$gray-900};
   --color-input-background-soft: #{$gray-800};
   --color-input-border: #{$gray-700};
   --color-input-placeholder: #{$gray-700};
