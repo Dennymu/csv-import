@@ -1,6 +1,6 @@
 {
-  "name": "csv-import-react",
-  "version": "1.0.14",
+  "name": "csv-import-react-dennis",
+  "version": "1.0.15",
   "description": "Open-source CSV and XLS/XLSX file importer for React and JavaScript",
   "main": "build/index.js",
   "module": "build/index.esm.js",
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tableflowhq/csv-import.git"
+    "url": "git+https://github.com/Dennymu/csv-import"
   },
   "keywords": [
     "csv",
@@ -24,17 +24,17 @@
   "author": "TableFlow",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tableflowhq/csv-import/issues"
+    "url": "https://github.com/Dennymu/csv-import/issues"
   },
-  "homepage": "https://github.com/tableflowhq/csv-import#readme",
+  "homepage": "https://github.com/Dennymu/csv-import/#readme",
   "types": "build/index.d.ts",
   "scripts": {
     "build:js": "rollup --config rollup.config-js.js && cp package-js.json build/package.json",
     "build:react": "rollup --config rollup.config.js",
     "publish:local:js": "yarn build:js && cd build && yalc publish",
     "publish:local:react": "yarn build:react && yalc publish",
-    "publish:js": "yarn build:js && cd build && npm publish",
-    "publish:react": "yarn build:react && npm publish",
+    "publish:js": "yarn build:js && cd build && npm publish --access=restricted",
+    "publish:react": "yarn build:react && npm publish --access=restricted",
     "build:watch": "rollup -c -w",
     "storybook": "storybook dev -p 6006",
     "storybook:export": "build-storybook",
