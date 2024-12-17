@@ -24,8 +24,15 @@ declare const Button: {
         solid: (props: import("@chakra-ui/styled-system").StyleFunctionProps) => {
             _hover: {
                 backgroundColor: string;
+                borderColor: string;
             };
             color: string;
+        } | {
+            color: string;
+            _hover: {
+                backgroundColor: string;
+                borderColor?: undefined;
+            };
         };
     } | undefined;
     defaultProps?: {
