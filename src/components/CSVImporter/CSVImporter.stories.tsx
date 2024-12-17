@@ -86,7 +86,7 @@ Importer.args = {
   template: template,
   passedData: passedData,
   customStyles: customStyles,
-  allowCustom: true,
+  allowCustomFields: true,
   customTranslations: {
     jp: {
       Upload: "アップロード",

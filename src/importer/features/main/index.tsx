@@ -30,7 +30,7 @@ export default function Main(props: CSVImporterProps) {
     showDownloadTemplateButton,
     skipHeaderRowSelection,
     passedData,
-    allowCustom,
+    allowCustomFields,
   } = props;
   const skipHeader = skipHeaderRowSelection ?? false;
 
@@ -69,7 +69,7 @@ export default function Main(props: CSVImporterProps) {
   });
 
   useEffect(() => {
-    const [parsedTemplate, parsedTemplateError] = convertRawTemplate(template, allowCustom || false);
+    const [parsedTemplate, parsedTemplateError] = convertRawTemplate(template, allowCustomFields || false);
     if (parsedTemplateError) {
       setInitializationError(parsedTemplateError);
     } else if (parsedTemplate) {

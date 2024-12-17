@@ -1,7 +1,10 @@
 import { Template, TemplateColumn } from "../types";
 import { parseObjectOrStringJSONToRecord, sanitizeKey } from "./utils";
 
-export function convertRawTemplate(rawTemplate?: Record<string, unknown> | string, allowCustom: boolean = false): [Template | null, string | null] {
+export function convertRawTemplate(
+  rawTemplate?: Record<string, unknown> | string,
+  allowCustomFields: boolean = false
+): [Template | null, string | null] {
   const template = parseObjectOrStringJSONToRecord("template", rawTemplate);
 
   if (!template || Object.keys(template).length === 0) {
@@ -66,7 +69,7 @@ export function convertRawTemplate(rawTemplate?: Record<string, unknown> | strin
     } as TemplateColumn);
   }
 
-  if (allowCustom) {
+  if (allowCustomFields) {
     columns.push({
       name: "Custom Column",
       key: "custom",
