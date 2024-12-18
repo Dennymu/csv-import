@@ -27595,7 +27595,7 @@ var darkenColor = function (color, percent) {
             .slice(1));
 };
 
-function convertRawTemplate(rawTemplate) {
+function convertRawTemplate(rawTemplate, hasCustomFields) {
     var template = parseObjectOrStringJSONToRecord("template", rawTemplate);
     if (!template || Object.keys(template).length === 0) {
         return [null, "The parameter 'template' is required. Please check the documentation for more details."];
@@ -27647,12 +27647,12 @@ function convertRawTemplate(rawTemplate) {
             suggested_mappings: suggestedMappings,
         });
     }
-    // if (hasCustomFields) {
-    //   columns.push({
-    //     name: "Custom Field",
-    //     key: "custom",
-    //   });
-    // }
+    if (hasCustomFields) {
+        columns.push({
+            name: "Custom Field",
+            key: "custom",
+        });
+    }
     if (columns.length === 0) {
         return [null, "Invalid template: No columns were provided"];
     }
@@ -50240,7 +50240,7 @@ function Main(props) {
         columns: [],
     }), parsedTemplate = _l[0], setParsedTemplate = _l[1];
     React.useEffect(function () {
-        var _a = convertRawTemplate(template), parsedTemplate = _a[0], parsedTemplateError = _a[1];
+        var _a = convertRawTemplate(template, hasCustomFields || false), parsedTemplate = _a[0], parsedTemplateError = _a[1];
         if (parsedTemplateError) {
             setInitializationError(parsedTemplateError);
         }
@@ -50266,9 +50266,6 @@ function Main(props) {
             goNext();
         }
     }, [passedData]);
-    React.useEffect(function () {
-        console.log("Has custom fields:", hasCustomFields);
-    });
     // Actions
     var reload = function () {
         setData(emptyData);

@@ -8,8 +8,11 @@ type CreateImporterProps = CSVImporterProps & { domElement?: Element };
 export function createCSVImporter(props: CreateImporterProps) {
   const ref = createRef<typeof CSVImporter & HTMLDialogElement>();
   const domElement = props.domElement || document.body;
+  const { hasCustomFields, ...rest } = props;
 
-  ReactDOM.render(<CSVImporter ref={ref} {...props} />, domElement);
+  console.log("Has custom fields:", hasCustomFields);
+
+  ReactDOM.render(<CSVImporter ref={ref} {...rest} />, domElement);
 
   return {
     instance: ref.current,

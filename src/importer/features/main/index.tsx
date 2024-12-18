@@ -69,7 +69,7 @@ export default function Main(props: CSVImporterProps) {
   });
 
   useEffect(() => {
-    const [parsedTemplate, parsedTemplateError] = convertRawTemplate(template);
+    const [parsedTemplate, parsedTemplateError] = convertRawTemplate(template, hasCustomFields || false);
     if (parsedTemplateError) {
       setInitializationError(parsedTemplateError);
     } else if (parsedTemplate) {
@@ -96,10 +96,6 @@ export default function Main(props: CSVImporterProps) {
       goNext();
     }
   }, [passedData]);
-
-  useEffect(() => {
-    console.log("Has custom fields:", hasCustomFields);
-  });
 
   // Actions
   const reload = () => {
