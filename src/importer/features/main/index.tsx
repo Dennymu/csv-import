@@ -30,7 +30,7 @@ export default function Main(props: CSVImporterProps) {
     showDownloadTemplateButton,
     skipHeaderRowSelection,
     passedData,
-    hasCustomFields,
+    hasCustomFields = false,
   } = props;
   const skipHeader = skipHeaderRowSelection ?? false;
 
@@ -69,7 +69,7 @@ export default function Main(props: CSVImporterProps) {
   });
 
   useEffect(() => {
-    const [parsedTemplate, parsedTemplateError] = convertRawTemplate(template, hasCustomFields || false);
+    const [parsedTemplate, parsedTemplateError] = convertRawTemplate(template);
     if (parsedTemplateError) {
       setInitializationError(parsedTemplateError);
     } else if (parsedTemplate) {
@@ -96,6 +96,10 @@ export default function Main(props: CSVImporterProps) {
       goNext();
     }
   }, [passedData]);
+
+  useEffect(() => {
+    console.log("Has custom fields:", hasCustomFields);
+  });
 
   // Actions
   const reload = () => {

@@ -27569,7 +27569,7 @@ var darkenColor = function (color, percent) {
             .slice(1));
 };
 
-function convertRawTemplate(rawTemplate, hasCustomFields) {
+function convertRawTemplate(rawTemplate) {
     var template = parseObjectOrStringJSONToRecord("template", rawTemplate);
     if (!template || Object.keys(template).length === 0) {
         return [null, "The parameter 'template' is required. Please check the documentation for more details."];
@@ -27621,12 +27621,12 @@ function convertRawTemplate(rawTemplate, hasCustomFields) {
             suggested_mappings: suggestedMappings,
         });
     }
-    if (hasCustomFields) {
-        columns.push({
-            name: "Custom Field",
-            key: "custom",
-        });
-    }
+    // if (hasCustomFields) {
+    //   columns.push({
+    //     name: "Custom Field",
+    //     key: "custom",
+    //   });
+    // }
     if (columns.length === 0) {
         return [null, "Invalid template: No columns were provided"];
     }
@@ -50186,16 +50186,16 @@ function Uploader(_a) {
 
 function Main(props) {
     var _this = this;
-    var _a = props.isModal, isModal = _a === void 0 ? true : _a, _b = props.modalOnCloseTriggered, modalOnCloseTriggered = _b === void 0 ? function () { return null; } : _b, template = props.template, onComplete = props.onComplete, customStyles = props.customStyles, showDownloadTemplateButton = props.showDownloadTemplateButton, skipHeaderRowSelection = props.skipHeaderRowSelection, passedData = props.passedData, hasCustomFields = props.hasCustomFields;
+    var _a = props.isModal, isModal = _a === void 0 ? true : _a, _b = props.modalOnCloseTriggered, modalOnCloseTriggered = _b === void 0 ? function () { return null; } : _b, template = props.template, onComplete = props.onComplete, customStyles = props.customStyles, showDownloadTemplateButton = props.showDownloadTemplateButton, skipHeaderRowSelection = props.skipHeaderRowSelection, passedData = props.passedData, _c = props.hasCustomFields, hasCustomFields = _c === void 0 ? false : _c;
     var skipHeader = skipHeaderRowSelection !== null && skipHeaderRowSelection !== void 0 ? skipHeaderRowSelection : false;
     var t = useTranslation().t;
     // Apply custom styles
     useCustomStyles(parseObjectOrStringJSON("customStyles", customStyles));
     // Stepper handler
-    var _c = useStepNavigation(StepEnum.Upload, skipHeader), currentStep = _c.currentStep, setStep = _c.setStep, goNext = _c.goNext, goBack = _c.goBack, stepper = _c.stepper;
+    var _d = useStepNavigation(StepEnum.Upload, skipHeader), currentStep = _d.currentStep, setStep = _d.setStep, goNext = _d.goNext, goBack = _d.goBack, stepper = _d.stepper;
     // Error handling
-    var _d = useState(null), initializationError = _d[0], setInitializationError = _d[1];
-    var _e = useState(null), dataError = _e[0], setDataError = _e[1];
+    var _e = useState(null), initializationError = _e[0], setInitializationError = _e[1];
+    var _f = useState(null), dataError = _f[0], setDataError = _f[1];
     // File data
     var emptyData = {
         fileName: "",
@@ -50203,18 +50203,18 @@ function Main(props) {
         sheetList: [],
         errors: [],
     };
-    var _f = useState(emptyData), data = _f[0], setData = _f[1];
+    var _g = useState(emptyData), data = _g[0], setData = _g[1];
     // Header row selection state
-    var _g = useState(0), selectedHeaderRow = _g[0], setSelectedHeaderRow = _g[1];
+    var _h = useState(0), selectedHeaderRow = _h[0], setSelectedHeaderRow = _h[1];
     // Map of upload column index -> TemplateColumnMapping
-    var _h = useState({}), columnMapping = _h[0], setColumnMapping = _h[1];
+    var _j = useState({}), columnMapping = _j[0], setColumnMapping = _j[1];
     // Used in the final step to show a loading indicator while the data is submitting
-    var _j = useState(false), isSubmitting = _j[0], setIsSubmitting = _j[1];
-    var _k = useState({
+    var _k = useState(false), isSubmitting = _k[0], setIsSubmitting = _k[1];
+    var _l = useState({
         columns: [],
-    }), parsedTemplate = _k[0], setParsedTemplate = _k[1];
+    }), parsedTemplate = _l[0], setParsedTemplate = _l[1];
     useEffect(function () {
-        var _a = convertRawTemplate(template, hasCustomFields || false), parsedTemplate = _a[0], parsedTemplateError = _a[1];
+        var _a = convertRawTemplate(template), parsedTemplate = _a[0], parsedTemplateError = _a[1];
         if (parsedTemplateError) {
             setInitializationError(parsedTemplateError);
         }
@@ -50240,6 +50240,9 @@ function Main(props) {
             goNext();
         }
     }, [passedData]);
+    useEffect(function () {
+        console.log("Has custom fields:", hasCustomFields);
+    });
     // Actions
     var reload = function () {
         setData(emptyData);
