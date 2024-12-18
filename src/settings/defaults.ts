@@ -5,6 +5,7 @@ const defaults: CSVImporterProps = {
   onComplete: (data) => console.log("onComplete", data),
   isModal: true,
   modalCloseOnOutsideClick: true,
+  allowCustomFields: false,
 };
 
 export default defaults;

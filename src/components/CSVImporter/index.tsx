@@ -21,12 +21,12 @@ const CSVImporter = forwardRef((importerProps: CSVImporterProps, forwardRef?: an
     className,
     onComplete,
     customStyles,
+    passedData,
+    allowCustomFields = false,
     showDownloadTemplateButton,
     skipHeaderRowSelection,
     language,
     customTranslations,
-    passedData,
-    allowCustomFields,
     ...props
   } = importerProps;
   const ref = forwardRef ?? useRef(null);
