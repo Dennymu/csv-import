@@ -22,7 +22,7 @@ const CSVImporter = forwardRef((importerProps: CSVImporterProps, forwardRef?: an
     onComplete,
     customStyles,
     passedData,
-    allowCustomFields = false,
+    hasCustomFields = false,
     showDownloadTemplateButton,
     skipHeaderRowSelection,
     language,

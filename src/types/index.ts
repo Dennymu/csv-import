@@ -17,10 +17,10 @@ export type CSVImporterProps = (HTMLAttributes<HTMLDialogElement> & HTMLAttribut
   onComplete?: (data: any) => void;
   waitOnComplete?: boolean;
   customStyles?: Record<string, string> | string;
+  passedData?: FileRow[];
+  hasCustomFields?: boolean;
   showDownloadTemplateButton?: boolean;
   skipHeaderRowSelection?: boolean;
   language?: string;
   customTranslations?: Resource;
-  passedData?: FileRow[];
-  allowCustomFields?: boolean;
 } & ModalParams;

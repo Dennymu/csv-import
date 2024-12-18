@@ -27595,7 +27595,7 @@ var darkenColor = function (color, percent) {
             .slice(1));
 };
 
-function convertRawTemplate(rawTemplate, allowCustomFields) {
+function convertRawTemplate(rawTemplate, hasCustomFields) {
     var template = parseObjectOrStringJSONToRecord("template", rawTemplate);
     if (!template || Object.keys(template).length === 0) {
         return [null, "The parameter 'template' is required. Please check the documentation for more details."];
@@ -27647,7 +27647,7 @@ function convertRawTemplate(rawTemplate, allowCustomFields) {
             suggested_mappings: suggestedMappings,
         });
     }
-    if (allowCustomFields) {
+    if (hasCustomFields) {
         columns.push({
             name: "Custom Field",
             key: "custom",
@@ -50212,7 +50212,7 @@ function Uploader(_a) {
 
 function Main(props) {
     var _this = this;
-    var _a = props.isModal, isModal = _a === void 0 ? true : _a, _b = props.modalOnCloseTriggered, modalOnCloseTriggered = _b === void 0 ? function () { return null; } : _b, template = props.template, onComplete = props.onComplete, customStyles = props.customStyles, showDownloadTemplateButton = props.showDownloadTemplateButton, skipHeaderRowSelection = props.skipHeaderRowSelection, passedData = props.passedData, allowCustomFields = props.allowCustomFields;
+    var _a = props.isModal, isModal = _a === void 0 ? true : _a, _b = props.modalOnCloseTriggered, modalOnCloseTriggered = _b === void 0 ? function () { return null; } : _b, template = props.template, onComplete = props.onComplete, customStyles = props.customStyles, showDownloadTemplateButton = props.showDownloadTemplateButton, skipHeaderRowSelection = props.skipHeaderRowSelection, passedData = props.passedData, hasCustomFields = props.hasCustomFields;
     var skipHeader = skipHeaderRowSelection !== null && skipHeaderRowSelection !== void 0 ? skipHeaderRowSelection : false;
     var t = useTranslation().t;
     // Apply custom styles
@@ -50240,7 +50240,7 @@ function Main(props) {
         columns: [],
     }), parsedTemplate = _k[0], setParsedTemplate = _k[1];
     React.useEffect(function () {
-        var _a = convertRawTemplate(template, allowCustomFields || false), parsedTemplate = _a[0], parsedTemplateError = _a[1];
+        var _a = convertRawTemplate(template, hasCustomFields || false), parsedTemplate = _a[0], parsedTemplateError = _a[1];
         if (parsedTemplateError) {
             setInitializationError(parsedTemplateError);
         }
@@ -52242,7 +52242,7 @@ var css_248z = ".CSVImporter {\r\n  border: none;\r\n  background-color: transpa
 styleInject(css_248z);
 
 var CSVImporter = React.forwardRef(function (importerProps, forwardRef) {
-    var _a = importerProps.isModal, isModal = _a === void 0 ? true : _a, _b = importerProps.modalIsOpen, modalIsOpen = _b === void 0 ? true : _b, _c = importerProps.modalOnCloseTriggered, modalOnCloseTriggered = _c === void 0 ? function () { return null; } : _c, modalCloseOnOutsideClick = importerProps.modalCloseOnOutsideClick; importerProps.template; var _d = importerProps.darkMode, darkMode = _d === void 0 ? false : _d, _e = importerProps.primaryColor, primaryColor = _e === void 0 ? "#7a5ef8" : _e, className = importerProps.className; importerProps.onComplete; importerProps.customStyles; importerProps.passedData; importerProps.allowCustomFields; importerProps.showDownloadTemplateButton; importerProps.skipHeaderRowSelection; var language = importerProps.language, customTranslations = importerProps.customTranslations, props = __rest$1(importerProps, ["isModal", "modalIsOpen", "modalOnCloseTriggered", "modalCloseOnOutsideClick", "template", "darkMode", "primaryColor", "className", "onComplete", "customStyles", "passedData", "allowCustomFields", "showDownloadTemplateButton", "skipHeaderRowSelection", "language", "customTranslations"]);
+    var _a = importerProps.isModal, isModal = _a === void 0 ? true : _a, _b = importerProps.modalIsOpen, modalIsOpen = _b === void 0 ? true : _b, _c = importerProps.modalOnCloseTriggered, modalOnCloseTriggered = _c === void 0 ? function () { return null; } : _c, modalCloseOnOutsideClick = importerProps.modalCloseOnOutsideClick; importerProps.template; var _d = importerProps.darkMode, darkMode = _d === void 0 ? false : _d, _e = importerProps.primaryColor, primaryColor = _e === void 0 ? "#7a5ef8" : _e, className = importerProps.className; importerProps.onComplete; importerProps.customStyles; importerProps.passedData; importerProps.hasCustomFields; importerProps.showDownloadTemplateButton; importerProps.skipHeaderRowSelection; var language = importerProps.language, customTranslations = importerProps.customTranslations, props = __rest$1(importerProps, ["isModal", "modalIsOpen", "modalOnCloseTriggered", "modalCloseOnOutsideClick", "template", "darkMode", "primaryColor", "className", "onComplete", "customStyles", "passedData", "hasCustomFields", "showDownloadTemplateButton", "skipHeaderRowSelection", "language", "customTranslations"]);
     var ref = forwardRef !== null && forwardRef !== void 0 ? forwardRef : React.useRef(null);
     var _g = useTranslation(); _g.t; var i18n = _g.i18n;
     var current = ref === null || ref === void 0 ? void 0 : ref.current;
