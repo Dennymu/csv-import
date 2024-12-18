@@ -27569,8 +27569,7 @@ var darkenColor = function (color, percent) {
             .slice(1));
 };
 
-function convertRawTemplate(rawTemplate, allowCustom) {
-    if (allowCustom === void 0) { allowCustom = false; }
+function convertRawTemplate(rawTemplate, allowCustomFields) {
     var template = parseObjectOrStringJSONToRecord("template", rawTemplate);
     if (!template || Object.keys(template).length === 0) {
         return [null, "The parameter 'template' is required. Please check the documentation for more details."];
@@ -27622,9 +27621,9 @@ function convertRawTemplate(rawTemplate, allowCustom) {
             suggested_mappings: suggestedMappings,
         });
     }
-    if (allowCustom) {
+    if (allowCustomFields) {
         columns.push({
-            name: "Custom Column",
+            name: "Custom Field",
             key: "custom",
         });
     }
@@ -28080,7 +28079,7 @@ function DropdownFields(_a) {
         var _loop_1 = function (key) {
             var option = options[key];
             var isSelected = selectedValues.some(function (item) { return item.key === (option === null || option === void 0 ? void 0 : option.value) && item.selected && option.value !== value; });
-            if (!isSelected) {
+            if (!isSelected || key === "Custom Column") {
                 newFilteredOptions[key] = option;
             }
         };
@@ -28209,6 +28208,7 @@ function useMapColumnsTable(uploadColumns, templateColumns, columnsValues, isLoa
                 return ({ key: key, selected: selected });
             });
             setSelectedValues(templateFieldsObj);
+            console.log("Template fields:", templateFields, "template fields object:", templateFieldsObj);
             return templatesFields;
         });
     };
@@ -50186,7 +50186,7 @@ function Uploader(_a) {
 
 function Main(props) {
     var _this = this;
-    var _a = props.isModal, isModal = _a === void 0 ? true : _a, _b = props.modalOnCloseTriggered, modalOnCloseTriggered = _b === void 0 ? function () { return null; } : _b, template = props.template, onComplete = props.onComplete, customStyles = props.customStyles, showDownloadTemplateButton = props.showDownloadTemplateButton, skipHeaderRowSelection = props.skipHeaderRowSelection, passedData = props.passedData, allowCustom = props.allowCustom;
+    var _a = props.isModal, isModal = _a === void 0 ? true : _a, _b = props.modalOnCloseTriggered, modalOnCloseTriggered = _b === void 0 ? function () { return null; } : _b, template = props.template, onComplete = props.onComplete, customStyles = props.customStyles, showDownloadTemplateButton = props.showDownloadTemplateButton, skipHeaderRowSelection = props.skipHeaderRowSelection, passedData = props.passedData, allowCustomFields = props.allowCustomFields;
     var skipHeader = skipHeaderRowSelection !== null && skipHeaderRowSelection !== void 0 ? skipHeaderRowSelection : false;
     var t = useTranslation().t;
     // Apply custom styles
@@ -50214,7 +50214,7 @@ function Main(props) {
         columns: [],
     }), parsedTemplate = _k[0], setParsedTemplate = _k[1];
     useEffect(function () {
-        var _a = convertRawTemplate(template, allowCustom || false), parsedTemplate = _a[0], parsedTemplateError = _a[1];
+        var _a = convertRawTemplate(template, allowCustomFields || false), parsedTemplate = _a[0], parsedTemplateError = _a[1];
         if (parsedTemplateError) {
             setInitializationError(parsedTemplateError);
         }
@@ -50336,16 +50336,26 @@ function Main(props) {
                         setIsSubmitting(true);
                         setColumnMapping(columnMapping);
                         var startIndex = (selectedHeaderRow || 0) + 1;
+                        var mappedHeaderRow = data.rows[selectedHeaderRow || 0];
+                        var headerRow = mappedHeaderRow.values;
                         var mappedRows = [];
                         data.rows.slice(startIndex).forEach(function (row) {
                             var resultingRow = {
                                 index: row.index - startIndex,
                                 values: {},
                             };
+                            var customCount = 1;
                             row.values.forEach(function (value, valueIndex) {
                                 var mapping = columnMapping[valueIndex];
                                 if (mapping && mapping.include) {
-                                    resultingRow.values[mapping.key] = value;
+                                    if (mapping.key === "custom") {
+                                        resultingRow.values["custom_header" + customCount] = headerRow[valueIndex] || "";
+                                        resultingRow.values[mapping.key + "_field" + customCount] = value;
+                                        customCount++;
+                                    }
+                                    else {
+                                        resultingRow.values[mapping.key] = value;
+                                    }
                                 }
                             });
                             mappedRows.push(resultingRow);
@@ -52206,7 +52216,7 @@ var css_248z = ".CSVImporter {\r\n  border: none;\r\n  background-color: transpa
 styleInject(css_248z);
 
 var CSVImporter = forwardRef$2(function (importerProps, forwardRef) {
-    var _a = importerProps.isModal, isModal = _a === void 0 ? true : _a, _b = importerProps.modalIsOpen, modalIsOpen = _b === void 0 ? true : _b, _c = importerProps.modalOnCloseTriggered, modalOnCloseTriggered = _c === void 0 ? function () { return null; } : _c, modalCloseOnOutsideClick = importerProps.modalCloseOnOutsideClick; importerProps.template; var _d = importerProps.darkMode, darkMode = _d === void 0 ? false : _d, _e = importerProps.primaryColor, primaryColor = _e === void 0 ? "#7a5ef8" : _e, className = importerProps.className; importerProps.onComplete; importerProps.customStyles; importerProps.showDownloadTemplateButton; importerProps.skipHeaderRowSelection; var language = importerProps.language, customTranslations = importerProps.customTranslations; importerProps.passedData; importerProps.allowCustom; var props = __rest$1(importerProps, ["isModal", "modalIsOpen", "modalOnCloseTriggered", "modalCloseOnOutsideClick", "template", "darkMode", "primaryColor", "className", "onComplete", "customStyles", "showDownloadTemplateButton", "skipHeaderRowSelection", "language", "customTranslations", "passedData", "allowCustom"]);
+    var _a = importerProps.isModal, isModal = _a === void 0 ? true : _a, _b = importerProps.modalIsOpen, modalIsOpen = _b === void 0 ? true : _b, _c = importerProps.modalOnCloseTriggered, modalOnCloseTriggered = _c === void 0 ? function () { return null; } : _c, modalCloseOnOutsideClick = importerProps.modalCloseOnOutsideClick; importerProps.template; var _d = importerProps.darkMode, darkMode = _d === void 0 ? false : _d, _e = importerProps.primaryColor, primaryColor = _e === void 0 ? "#7a5ef8" : _e, className = importerProps.className; importerProps.onComplete; importerProps.customStyles; importerProps.showDownloadTemplateButton; importerProps.skipHeaderRowSelection; var language = importerProps.language, customTranslations = importerProps.customTranslations; importerProps.passedData; importerProps.allowCustomFields; var props = __rest$1(importerProps, ["isModal", "modalIsOpen", "modalOnCloseTriggered", "modalCloseOnOutsideClick", "template", "darkMode", "primaryColor", "className", "onComplete", "customStyles", "showDownloadTemplateButton", "skipHeaderRowSelection", "language", "customTranslations", "passedData", "allowCustomFields"]);
     var ref = forwardRef !== null && forwardRef !== void 0 ? forwardRef : useRef(null);
     var _f = useTranslation(); _f.t; var i18n = _f.i18n;
     var current = ref === null || ref === void 0 ? void 0 : ref.current;
