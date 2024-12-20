@@ -28079,7 +28079,7 @@ function DropdownFields(_a) {
         var _loop_1 = function (key) {
             var option = options[key];
             var isSelected = selectedValues.some(function (item) { return item.key === (option === null || option === void 0 ? void 0 : option.value) && item.selected && option.value !== value; });
-            if (!isSelected || key === "Custom Column") {
+            if (!isSelected || key === "Custom Field") {
                 newFilteredOptions[key] = option;
             }
         };
